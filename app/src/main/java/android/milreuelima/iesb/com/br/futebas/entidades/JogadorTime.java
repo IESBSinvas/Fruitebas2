@@ -7,6 +7,18 @@ public class JogadorTime extends Jogador {
     private Time time;
     private PosicaoJogador posicao;
 
+    JogadorTime(Jogador jogador){
+        this.setId(jogador.getId());
+        this.setNome(jogador.getNome());
+        this.setTelefone(jogador.getTelefone());
+    }
+
+/*
+    JogadorTime(){
+
+    }
+*/
+
     public Time getTime() {
         return time;
     }
