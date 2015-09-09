@@ -9,7 +9,7 @@ import java.util.List;
 public class Time {
     private int id;
     private String nome;
-    List<JogadorTime> jogadores;
+    private List<JogadorTime> jogadores;
 
     Time(){
         jogadores = new ArrayList<>();
@@ -40,6 +40,7 @@ public class Time {
         JogadorTime novoJogador = new JogadorTime(jogador);
         if(!jogadores.contains(novoJogador)){
             //É um jogador novo para o time.
+            jogadores.add(novoJogador);
 
         }else{
             //O time já tem este Jogador.

@@ -13,11 +13,9 @@ public class JogadorTime extends Jogador {
         this.setTelefone(jogador.getTelefone());
     }
 
-/*
-    JogadorTime(){
-
-    }
-*/
+    //JogadorTime(){
+    //
+    //}
 
     public Time getTime() {
         return time;
