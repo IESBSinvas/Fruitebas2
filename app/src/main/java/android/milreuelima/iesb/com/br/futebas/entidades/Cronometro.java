@@ -5,7 +5,7 @@ package android.milreuelima.iesb.com.br.futebas.entidades;
  */
 public class Cronometro {
 
-    // Vaiii corinthians !!!!!
+    //// Nova atualizacao
 
 
     private int variavel;
