@@ -45,14 +45,13 @@ public class MainFutebasActivity extends AppCompatActivity {
 
                 if (click)
 
+                {
                     cronometro.setBase(SystemClock.elapsedRealtime() - tempoPausado);
-
+                }
                     cronometro.start();
-
 
             }
         });;
-
 
         btnPause.setOnClickListener(new View.OnClickListener() {
 
@@ -60,10 +59,8 @@ public class MainFutebasActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 tempoPausado = (SystemClock.elapsedRealtime() - cronometro.getBase());
-                click = false;
+                click = true;
                 cronometro.stop();
-
-
 
             }
         });
