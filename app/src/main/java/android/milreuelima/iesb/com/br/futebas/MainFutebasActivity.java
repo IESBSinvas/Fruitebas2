@@ -41,9 +41,12 @@ public class MainFutebasActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
+
                 if (click)
+
                     cronometro.setBase(SystemClock.elapsedRealtime() - tempoPausado);
-                cronometro.start();
+
+                    cronometro.start();
 
 
             }
@@ -70,7 +73,7 @@ public class MainFutebasActivity extends AppCompatActivity {
             public void onClick(View v) {
                 click = true;
                 cronometro.stop();
-                cronometro.setText("00:00:00");
+                cronometro.setText("00:00");
 
             }
         });
@@ -79,23 +82,29 @@ public class MainFutebasActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        int idSelecionado = item.getItemId();
+
+        switch (idSelecionado) {
+            case R.id.menu_novo_jogo:
+
+                break;
+            case R.id.menu_pagamento:
+    //           Intent intent = new Intent(this, Pagamento.class);
+    //            startActivity(intent);
+
+            default:
+                break;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
 }
