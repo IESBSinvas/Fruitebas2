@@ -1,5 +1,6 @@
 package android.milreuelima.iesb.com.br.futebas.Atividades;
 
+import android.media.MediaPlayer;
 import android.milreuelima.iesb.com.br.futebas.R;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,6 +48,11 @@ public class MainFutebasActivity extends AppCompatActivity {
 
                 {
                     cronometro.setBase(SystemClock.elapsedRealtime() - tempoPausado);
+
+
+                    MediaPlayer player = MediaPlayer.create(MainFutebasActivity.this, R.raw.apitodefutebol);
+                player.start();
+
                 }
                     cronometro.start();
 

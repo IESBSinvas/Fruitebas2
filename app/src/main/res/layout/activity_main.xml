@@ -113,7 +113,7 @@
             android:layout_height="match_parent"
             android:layout_below="@+id/textView1"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="100sp"
+            android:layout_marginTop="10sp"
             android:text="Chronometer"
             android:textAlignment="center"
             android:textSize="60sp"
