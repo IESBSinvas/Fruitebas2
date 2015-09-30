@@ -1,5 +1,6 @@
-package android.milreuelima.iesb.com.br.futebas;
+package android.milreuelima.iesb.com.br.futebas.Atividades;
 
+import android.milreuelima.iesb.com.br.futebas.R;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -33,7 +34,7 @@ public class MainFutebasActivity extends AppCompatActivity {
         final Chronometer cronometro = (Chronometer) findViewById(R.id.chronometer);
         ImageButton btnStart = (ImageButton) findViewById(R.id.play);
         ImageButton btnPause = (ImageButton) findViewById(R.id.pause);
-        ImageButton btnStop = (ImageButton) findViewById(R.id.stop);
+//        ImageButton btnStop = (ImageButton) findViewById(R.id.stop);
 
 
 
@@ -66,7 +67,7 @@ public class MainFutebasActivity extends AppCompatActivity {
 
             }
         });
-
+/*
         btnStop.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -77,6 +78,7 @@ public class MainFutebasActivity extends AppCompatActivity {
 
             }
         });
+    */
     }
 
 

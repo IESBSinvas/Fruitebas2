@@ -4,4 +4,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="Futebas">Futebas</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_lista_jogadores">ListaJogadores</string>
+    <string name="title_activity_pagamento">Pagamento</string>
 </resources>
