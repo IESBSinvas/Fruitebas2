@@ -40,6 +40,22 @@
                 android:layout_margin="5sp"
                 />
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Acrescimo"
+                android:src="@drawable/iconeacrescimo"
+                android:layout_margin="5sp"
+                android:layout_gravity="end"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/TextoAcrescimo"
+
+                />
+
 
         </LinearLayout>
 
@@ -60,6 +76,8 @@
      android:layout_width="80dp"
      android:layout_height="80dp"
      android:background="@drawable/bola"
+
+            android:id="@+id/marcarGolCasa"
             />
 
         <TextView android:text="   0"
@@ -93,7 +111,8 @@
         <ImageButton
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:background="@drawable/bola"/>
+            android:background="@drawable/bola"
+            android:id="@+id/marcarGolVisitante"/>
 
 
     </LinearLayout>

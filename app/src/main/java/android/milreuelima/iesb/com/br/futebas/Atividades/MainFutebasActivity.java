@@ -20,10 +20,14 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class MainFutebasActivity extends AppCompatActivity {
     boolean click = true;
     long tempoPausado = 0;
+    int placarVisitanteContador = 0;
+    int placarCasaContadoer = 0;
+    int acrescimos = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,46 +35,48 @@ public class MainFutebasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
+//      Cronometro
         final Chronometer cronometro = (Chronometer) findViewById(R.id.chronometer);
         ImageButton btnStart = (ImageButton) findViewById(R.id.play);
         ImageButton btnPause = (ImageButton) findViewById(R.id.pause);
-//        ImageButton btnStop = (ImageButton) findViewById(R.id.stop);
+//      ImageButton btnStop = (ImageButton) findViewById(R.id.stop);
+
+        // Placar
+        ImageButton btnMarcarGolCasa = (ImageButton) findViewById(R.id.marcarGolCasa);
+        ImageButton btnMarcarGolVisitante = (ImageButton) findViewById(R.id.marcarGolVisitante);
+        final TextView textoPlacarCasa = (TextView) findViewById(R.id.placarCasa);
+        final TextView textoPlacarVisitante = (TextView) findViewById(R.id.placarVisitante);
 
 
-
+        // implemntacao cronometro
         btnStart.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
-
                 if (click)
-
                 {
                     cronometro.setBase(SystemClock.elapsedRealtime() - tempoPausado);
-
-
+                    // Som de apito
                     MediaPlayer player = MediaPlayer.create(MainFutebasActivity.this, R.raw.apitodefutebol);
                 player.start();
 
                 }
                     cronometro.start();
-
             }
         });;
 
         btnPause.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
 
                 tempoPausado = (SystemClock.elapsedRealtime() - cronometro.getBase());
                 click = true;
                 cronometro.stop();
-
             }
         });
 /*
+
+//      Botao De para ainda em Duvida se sera implementado
+
         btnStop.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -82,7 +88,31 @@ public class MainFutebasActivity extends AppCompatActivity {
             }
         });
     */
+
+        //  implemantacao Placar
+
+        btnMarcarGolCasa.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                placarCasaContadoer = placarCasaContadoer + 1;
+
+                textoPlacarCasa.setText(" " + placarCasaContadoer + " ");
+            }
+        });
+
+        btnMarcarGolVisitante.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                placarVisitanteContador = placarVisitanteContador + 1;
+                textoPlacarVisitante.setText(" " + placarVisitanteContador + " ");
+            }
+        });
     }
+
+
+
+
+
 
 
     @Override
