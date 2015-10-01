@@ -38,7 +38,7 @@ public class MainFutebasActivity extends AppCompatActivity {
 //      Cronometro
         final Chronometer cronometro = (Chronometer) findViewById(R.id.chronometer);
         ImageButton btnStart = (ImageButton) findViewById(R.id.play);
-        ImageButton btnPause = (ImageButton) findViewById(R.id.pause);
+        final ImageButton btnPause = (ImageButton) findViewById(R.id.pause);
 //      ImageButton btnStop = (ImageButton) findViewById(R.id.stop);
 
         // Placar
@@ -61,6 +61,7 @@ public class MainFutebasActivity extends AppCompatActivity {
 
                 }
                     cronometro.start();
+                btnPause.setEnabled(true);
             }
         });;
 
@@ -71,6 +72,7 @@ public class MainFutebasActivity extends AppCompatActivity {
                 tempoPausado = (SystemClock.elapsedRealtime() - cronometro.getBase());
                 click = true;
                 cronometro.stop();
+                btnPause.setEnabled(false);
             }
         });
 /*
