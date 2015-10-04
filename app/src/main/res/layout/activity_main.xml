@@ -69,13 +69,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="@color/com_facebook_share_button_text_color"
+
         >
 
         <ImageButton
      android:layout_width="80dp"
      android:layout_height="80dp"
-     android:background="@drawable/bola"
+            android:background="@drawable/bola"
+
 
             android:id="@+id/marcarGolCasa"
             />
@@ -86,8 +87,8 @@
             android:textSize="20dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#0040FF"
-            android:gravity="center"
+
+             android:gravity="center"
 
             />
         <TextView android:text="X"
@@ -95,7 +96,6 @@
             android:textSize="20dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#FFFFFF"
             android:gravity="center"
 
             />
@@ -105,7 +105,6 @@
             android:textSize="20dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#FF0000"
             android:gravity="center"/>
 
         <ImageButton

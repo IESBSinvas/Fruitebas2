@@ -35,6 +35,10 @@
             android:name=".Atividades.Pagamento"
             android:label="@string/title_activity_pagamento" >
         </activity>
+        <activity
+            android:name=".Atividades.Preferencias"
+            android:label="@string/title_activity_preferencias" >
+        </activity>
     </application>
 
 </manifest>

@@ -60,7 +60,7 @@ public class MainFutebasActivity extends AppCompatActivity {
                 player.start();
 
                 }
-                    cronometro.start();
+                cronometro.start();
                 btnPause.setEnabled(true);
             }
         });;
