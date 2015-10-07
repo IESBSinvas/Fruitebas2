@@ -22,15 +22,10 @@
         android:title="Espera do proximo">
         <menu>
             <item
-                android:id="@+id/menu_enviar_alunos"
+                android:id="@+id/menu_ListaJogador"
                 android:icon="@drawable/bola"
                 app:showAsAction="always"
                 android:title="Fila de espera"/>
-            <item
-                android:id="@+id/menu_receber_provas"
-                android:icon="@drawable/bola"
-                app:showAsAction="always"
-                android:title="Campeonato "/>
             <item
                 android:id="@+id/menu_preferencias"
                 android:icon="@drawable/bola"

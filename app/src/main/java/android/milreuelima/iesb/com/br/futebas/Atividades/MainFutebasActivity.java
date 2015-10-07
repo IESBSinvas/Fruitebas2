@@ -131,11 +131,22 @@ public class MainFutebasActivity extends AppCompatActivity {
 
         switch (idSelecionado) {
             case R.id.menu_novo_jogo:
-
-                break;
+                Intent intentNovoJogo = new Intent(this, MainFutebasActivity.class);
+                startActivity(intentNovoJogo);
+            break;
             case R.id.menu_pagamento:
-    //           Intent intent = new Intent(this, Pagamento.class);
-    //            startActivity(intent);
+              Intent intentPagamento = new Intent(this, Pagamento.class);
+              startActivity(intentPagamento);
+                break;
+            case R.id.menu_preferencias:
+                Intent intentPreferencia = new Intent(this, Preferencias.class);
+                startActivity(intentPreferencia);
+                break;
+            case R.id.menu_ListaJogador:
+                Intent intentListaJogador = new Intent(this, ListaJogadores.class);
+                startActivity(intentListaJogador);
+                break;
+
 
             default:
                 break;
