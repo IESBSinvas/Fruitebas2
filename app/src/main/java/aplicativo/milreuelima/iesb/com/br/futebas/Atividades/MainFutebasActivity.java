@@ -1,25 +1,16 @@
-package android.milreuelima.iesb.com.br.futebas.Atividades;
+package aplicativo.milreuelima.iesb.com.br.futebas.Atividades;
 
 import android.media.MediaPlayer;
-import android.milreuelima.iesb.com.br.futebas.R;
+import aplicativo.milreuelima.iesb.com.br.futebas.R;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.SystemClock;
-import android.sax.StartElementListener;
-import android.view.ContextMenu;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainFutebasActivity extends AppCompatActivity {

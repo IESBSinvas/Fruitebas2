@@ -1,11 +1,11 @@
-package android.milreuelima.iesb.com.br.futebas.Atividades;
+package aplicativo.milreuelima.iesb.com.br.futebas.Atividades;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.milreuelima.iesb.com.br.futebas.R;
+import aplicativo.milreuelima.iesb.com.br.futebas.R;
 
 /**
  * A placeholder fragment containing a simple view.

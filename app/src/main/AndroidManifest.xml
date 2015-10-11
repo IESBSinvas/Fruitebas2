@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="android.milreuelima.iesb.com.br.futebas" >
+    package="aplicativo.milreuelima.iesb.com.br.futebas" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".Atividades.MainFutebasActivity"
+            android:name="aplicativo.milreuelima.iesb.com.br.futebas.Atividades.MainFutebasActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,15 +28,15 @@
             android:value="1647954948749801" />
 
         <activity
-            android:name=".Atividades.ListaJogadores"
+            android:name="aplicativo.milreuelima.iesb.com.br.futebas.Atividades.ListaJogadores"
             android:label="@string/title_activity_lista_jogadores" >
         </activity>
         <activity
-            android:name=".Atividades.Pagamento"
+            android:name="aplicativo.milreuelima.iesb.com.br.futebas.Atividades.Pagamento"
             android:label="@string/title_activity_pagamento" >
         </activity>
         <activity
-            android:name=".Atividades.Preferencias"
+            android:name="aplicativo.milreuelima.iesb.com.br.futebas.Atividades.Preferencias"
             android:label="@string/title_activity_preferencias" >
         </activity>
     </application>

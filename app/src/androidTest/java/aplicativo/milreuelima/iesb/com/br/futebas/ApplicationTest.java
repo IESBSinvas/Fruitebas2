@@ -1,4 +1,4 @@
-package android.milreuelima.iesb.com.br.futebas;
+package aplicativo.milreuelima.iesb.com.br.futebas;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

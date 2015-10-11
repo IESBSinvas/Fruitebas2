@@ -1,4 +1,4 @@
-package android.milreuelima.iesb.com.br.futebas.entidades;
+package aplicativo.milreuelima.iesb.com.br.futebas.entidades;
 
 import java.util.Date;
 import java.util.List;
