@@ -11,25 +11,18 @@
         app:showAsAction="always"
         />
     <item
+        android:id="@+id/menu_espera"
         android:icon="@drawable/bola"
         app:showAsAction="always"
-        android:title="Espera do proximo">
+        android:title="Espera">
         <menu>
-            <item
-                android:id="@+id/menu_ListaJogador"
-                android:icon="@drawable/bola"
-                app:showAsAction="always"
-                android:title="Fila de espera"/>
+
             <item
                 android:id="@+id/menu_pagamento"
                 app:showAsAction="always"
                 android:icon="@drawable/bola"
                 android:title="Pagamento"/>
-            <item
-                android:id="@+id/menu_preferencias"
-                android:icon="@drawable/bola"
-                app:showAsAction="always"
-                android:title="Preferências"/>
+
         </menu>
     </item>
 

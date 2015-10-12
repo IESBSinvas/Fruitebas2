@@ -43,7 +43,7 @@ public class ListaJogadores extends AppCompatActivity {
                 Intent intentPreferencia = new Intent(this, Preferencias.class);
                 startActivity(intentPreferencia);
                 break;
-            case R.id.menu_ListaJogador:
+            case R.id.menu_espera:
                 Intent intentListaJogador = new Intent(this, ListaJogadores.class);
                 startActivity(intentListaJogador);
                 break;

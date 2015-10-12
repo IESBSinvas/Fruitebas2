@@ -1,17 +1,18 @@
 package aplicativo.milreuelima.iesb.com.br.futebas.Atividades;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
-import aplicativo.milreuelima.iesb.com.br.futebas.R;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.SystemClock;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.content.Intent;
-import android.os.SystemClock;
 import android.view.View;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+import aplicativo.milreuelima.iesb.com.br.futebas.R;
 
 public class MainFutebasActivity extends AppCompatActivity {
     boolean click = true;
@@ -19,6 +20,7 @@ public class MainFutebasActivity extends AppCompatActivity {
     int placarVisitanteContador = 0;
     int placarCasaContadoer = 0;
     int acrescimos = 0;
+    long horafinal = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +30,10 @@ public class MainFutebasActivity extends AppCompatActivity {
 
 //      Cronometro
         final Chronometer cronometro = (Chronometer) findViewById(R.id.chronometer);
-        ImageButton btnStart = (ImageButton) findViewById(R.id.play);
+        final ImageButton btnStart = (ImageButton) findViewById(R.id.play);
         final ImageButton btnPause = (ImageButton) findViewById(R.id.pause);
 //      ImageButton btnStop = (ImageButton) findViewById(R.id.stop);
+        final ImageButton btnAcrescimo = (ImageButton) findViewById(R.id.Acrescimo);
 
         // Placar
         ImageButton btnMarcarGolCasa = (ImageButton) findViewById(R.id.marcarGolCasa);
@@ -38,8 +41,40 @@ public class MainFutebasActivity extends AppCompatActivity {
         final TextView textoPlacarCasa = (TextView) findViewById(R.id.placarCasa);
         final TextView textoPlacarVisitante = (TextView) findViewById(R.id.placarVisitante);
 
+        //Botoes habilitados no inicio
+        btnPause.setEnabled(false);
+        btnStart.setEnabled(true);
+        btnAcrescimo.setEnabled(false);
+
 
         // implemntacao cronometro
+
+       cronometro.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
+           @Override
+           public void onChronometerTick(Chronometer chronometer) {
+
+
+               long horaAtual = ((SystemClock.elapsedRealtime()- cronometro.getBase())/1000)/60;
+
+ //              String mensagem = "Hora atual " + horaAtual + "Hora Final " + horafinal;
+ //              Toast.makeText(MainFutebasActivity.this, mensagem, Toast.LENGTH_LONG).show();
+
+               if ((horafinal <= horaAtual)) {
+
+                   String mensagem = "Fim de Jogo!!!!";
+                   Toast.makeText(MainFutebasActivity.this, mensagem, Toast.LENGTH_LONG).show();
+
+                   Intent intent = new Intent(MainFutebasActivity.this, MainFutebasActivity.class);
+                   startActivity(intent);
+
+
+               }
+
+           }
+       });
+
+
+
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,8 +86,11 @@ public class MainFutebasActivity extends AppCompatActivity {
                 player.start();
 
                 }
+
                 cronometro.start();
                 btnPause.setEnabled(true);
+                btnStart.setEnabled(false);
+                btnAcrescimo.setEnabled(true);
             }
         });;
 
@@ -63,12 +101,15 @@ public class MainFutebasActivity extends AppCompatActivity {
                 tempoPausado = (SystemClock.elapsedRealtime() - cronometro.getBase());
                 click = true;
                 cronometro.stop();
+
                 btnPause.setEnabled(false);
+                btnStart.setEnabled(true);
+                btnAcrescimo.setEnabled(true);
             }
         });
 /*
 
-//      Botao De para ainda em Duvida se sera implementado
+//      Botao De parar ainda em Duvida se sera implementado
 
         btnStop.setOnClickListener(new View.OnClickListener() {
 
@@ -104,10 +145,6 @@ public class MainFutebasActivity extends AppCompatActivity {
 
 
 
-
-
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
@@ -133,7 +170,7 @@ public class MainFutebasActivity extends AppCompatActivity {
                 Intent intentPreferencia = new Intent(this, Preferencias.class);
                 startActivity(intentPreferencia);
                 break;
-            case R.id.menu_ListaJogador:
+            case R.id.menu_espera:
                 Intent intentListaJogador = new Intent(this, ListaJogadores.class);
                 startActivity(intentListaJogador);
                 break;
@@ -145,5 +182,6 @@ public class MainFutebasActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
 }

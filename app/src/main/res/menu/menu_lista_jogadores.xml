@@ -9,16 +9,7 @@
         android:title="NovoJogo"
         app:showAsAction="always"
         />
-    <item
-        android:icon="@drawable/bola"
-        app:showAsAction="always"
-        android:title="Espera do proximo">
         <menu>
-            <item
-                android:id="@+id/menu_ListaJogador"
-                android:icon="@drawable/bola"
-                app:showAsAction="always"
-                android:title="Lista de Jogadores"/>
             <item
                 android:icon="@drawable/bola"
                 android:id="@+id/menu_pagamento"
@@ -30,6 +21,6 @@
                 app:showAsAction="always"
                 android:title="Preferências"/>
         </menu>
-    </item>
+
 
 </menu>
