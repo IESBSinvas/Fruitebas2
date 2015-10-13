@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import aplicativo.milreuelima.iesb.com.br.futebas.R;
+
 public class Preferencias extends AppCompatActivity {
 
     @Override
@@ -29,18 +31,22 @@ public class Preferencias extends AppCompatActivity {
         int idSelecionado = item.getItemId();
 
         switch (idSelecionado) {
-            case aplicativo.milreuelima.iesb.com.br.futebas.R.id.menu_novo_jogo:
+            case R.id.menu_novo_jogo:
                 Intent intentNovoJogo = new Intent(this, MainFutebasActivity.class);
                 startActivity(intentNovoJogo);
-            case aplicativo.milreuelima.iesb.com.br.futebas.R.id.menu_pagamento:
+                break;
+            case R.id.menu_pagamento:
                 Intent intentPagamento = new Intent(this, Pagamento.class);
                 startActivity(intentPagamento);
-            case aplicativo.milreuelima.iesb.com.br.futebas.R.id.menu_preferencias:
+                break;
+            case R.id.menu_preferencias:
                 Intent intentPreferencia = new Intent(this, Preferencias.class);
                 startActivity(intentPreferencia);
-            case aplicativo.milreuelima.iesb.com.br.futebas.R.id.menu_ListaJogador:
+                break;
+            case R.id.menu_espera:
                 Intent intentListaJogador = new Intent(this, ListaJogadores.class);
                 startActivity(intentListaJogador);
+                break;
 
             default:
                 break;
