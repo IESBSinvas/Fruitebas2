@@ -64,12 +64,15 @@ public class Pagamento extends AppCompatActivity {
             case R.id.menu_pagamento:
                 Intent intentPagamento = new Intent(this, Pagamento.class);
                 startActivity(intentPagamento);
+                break;
             case R.id.menu_preferencias:
                 Intent intentPreferencia = new Intent(this, Preferencias.class);
                 startActivity(intentPreferencia);
-            case R.id.menu_ListaJogador:
+                break;
+            case R.id.menu_espera:
                 Intent intentListaJogador = new Intent(this, ListaJogadores.class);
                 startActivity(intentListaJogador);
+                break;
 
             default:
                 break;
