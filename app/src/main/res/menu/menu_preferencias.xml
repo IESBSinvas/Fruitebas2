@@ -9,11 +9,11 @@
         android:id="@+id/menu_novo_jogo"
         android:title="NovoJogo"
         app:showAsAction="always"
-        android:icon="@drawable/newgame"
+        android:icon="@drawable/bola"
         />
     <item
         android:id="@+id/menu_espera"
-        android:icon="@drawable/jogador"
+        android:icon="@drawable/bola"
         app:showAsAction="always"
         android:title="Espera">
 
@@ -21,7 +21,7 @@
             <item
                 android:id="@+id/menu_pagamento"
                 app:showAsAction="always"
-                android:icon="@drawable/pagamento"
+                android:icon="@drawable/bola"
                 android:title="Pagamento"/>
 
 
