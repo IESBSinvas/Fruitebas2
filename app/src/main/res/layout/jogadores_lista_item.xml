@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:background="@drawable/retangular_redondo"
+    android:paddingLeft="10dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#333"
+        android:textSize="12dp"
+        android:id="@+id/jogadores_lista_item_hora"
+        android:text="12:30"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#333"
+        android:textSize="16dp"
+        android:id="@+id/jogadores_lista_item_nome"
+        android:text="Eduardo Alves"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/jogadores_lista_item_star"
+        android:src="@drawable/ic_action_star_0"
+        android:background="@null"
+        android:layout_marginLeft="20dp" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/jogadores_lista_item_menos"
+        android:src="@drawable/ic_action_minus"
+        android:background="@drawable/redondo"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" />
+
+</LinearLayout>
