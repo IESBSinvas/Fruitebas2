@@ -7,20 +7,21 @@
     <item
         android:id="@+id/menu_novo_jogo"
         android:title="NovoJogo"
+        android:icon="@drawable/newgame"
         app:showAsAction="always"
         />
-        <menu>
+
             <item
-                android:icon="@drawable/bola"
+                android:icon="@drawable/pagamento"
                 android:id="@+id/menu_pagamento"
                 app:showAsAction="always"
                 android:title="Pagamento"/>
             <item
                 android:id="@+id/menu_preferencias"
-                android:icon="@drawable/bola"
+                android:icon="@drawable/iconeconfiguracao"
                 app:showAsAction="always"
-                android:title="Preferências"/>
+                android:title="iconeconfiguracao"/>
+
         </menu>
 
 
-</menu>

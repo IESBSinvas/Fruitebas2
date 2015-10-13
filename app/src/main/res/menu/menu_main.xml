@@ -11,23 +11,27 @@
         android:id="@+id/menu_novo_jogo"
         android:title="NovoJogo"
         app:showAsAction="always"
-        />
+        android:icon="@drawable/newgame"
+        >
+</item>
     <item
         android:id="@+id/menu_espera"
-        android:icon="@drawable/bola"
+        android:icon="@drawable/jogador"
         app:showAsAction="always"
         android:title="Espera"
         >
-        <menu>
-            <item
-                android:id="@+id/menu_pagamento"
-                app:showAsAction="always"
-                android:title="Pagamento"/>
-            <item
-                android:id="@+id/menu_preferencias"
-                android:icon="@drawable/bola"
-                app:showAsAction="always"
-                android:title="Preferências"/>
-        </menu>
+</item>
+        <item
+            android:id="@+id/menu_pagamento"
+            android:icon="@drawable/pagamento"
+            app:showAsAction="always"
+            android:title="Pagamento">
     </item>
+    <item
+        android:id="@+id/menu_preferencias"
+        android:icon="@drawable/iconeconfiguracao"
+        app:showAsAction="always"
+        android:title="Preferências"/>
+
+
 </menu>

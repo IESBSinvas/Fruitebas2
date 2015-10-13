@@ -150,27 +150,34 @@ public class MainFutebasActivity extends AppCompatActivity {
 
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
+
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        Chronometer pararCronometro = (Chronometer) findViewById(R.id.chronometer);
+
         int idSelecionado = item.getItemId();
 
         switch (idSelecionado) {
             case R.id.menu_novo_jogo:
+                pararCronometro.stop();
                 Intent intentNovoJogo = new Intent(this, MainFutebasActivity.class);
                 startActivity(intentNovoJogo);
             break;
-            case R.id.menu_pagamento:
+           case R.id.menu_pagamento:
+                pararCronometro.stop();
               Intent intentPagamento = new Intent(this, Pagamento.class);
               startActivity(intentPagamento);
                 break;
             case R.id.menu_preferencias:
+                pararCronometro.stop();
                 Intent intentPreferencia = new Intent(this, Preferencias.class);
                 startActivity(intentPreferencia);
                 break;
             case R.id.menu_espera:
+                pararCronometro.stop();
                 Intent intentListaJogador = new Intent(this, ListaJogadores.class);
                 startActivity(intentListaJogador);
                 break;
