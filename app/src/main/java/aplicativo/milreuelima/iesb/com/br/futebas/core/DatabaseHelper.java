@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        //Criação das tabelas
+        //Criacao das tabelas
         //db.execSQL("CREATE TABLE usuario (_id INTEGER PRIMARY KEY, nome TEXT, senha TEXT, saldo TEXT);");
         //db.execSQL("CREATE TABLE historico (_id INTEGER PRIMARY KEY, idusuario TEXT, datahora TEXT, pontuacao TEXT);");
 
@@ -38,7 +38,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        //Escrever aqui o código que será executado num upgrade de versão do banco de dados.
+        //Escrever aqui o codigo que sera executado num upgrade de versao do banco de dados.
     }
 
     @Override
