@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_material_dark"
+    android:padding="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lista_equipes_time_a"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:divider="@null"
+            android:background="@drawable/retangular_redondo"/>
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lista_equipes_time_b"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dp"
+            android:divider="@null"
+            android:background="@drawable/retangular_redondo"/>
+    </LinearLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Próximos"
+        android:textColor="#FFF"
+        android:textSize="18dp"
+        android:layout_marginTop="10dp" />
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lista_equipes_proximos"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/retangular_redondo"
+        android:layout_weight="1" />
+
+</LinearLayout>
