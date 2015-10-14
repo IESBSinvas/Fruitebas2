@@ -1,7 +1,7 @@
 package aplicativo.milreuelima.iesb.com.br.futebas.entidades;
 
 /**
- * Created by Sinvas on 24/08/2015.
+ * Criado por Sinvas em 24/08/2015.
  */
 public class Placar {
 
@@ -61,5 +61,17 @@ public class Placar {
         TIME_B,
         TIME_INDEFINIDO
     }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+
+        Placar retorno = (Placar)super.clone();
+        retorno.golsA = this.golsA;
+        retorno.golsB = this.golsB;
+        retorno.timeUltimoGol = this.timeUltimoGol;
+
+        return retorno;
+    }
+
 }
 
