@@ -26,13 +26,15 @@ public class MainRules {
         //TODO: Buscar no BD o valor do id da proxima Partida (max).
         idProximaPartida = 0;
 
-        if (!false){
+        if (!true){
             //Ao iniciar, verifica se havia alguma partida em andamento nesta data, para carregar seus dados
             //TODO: Buscar no BD estas informações
         }else{
             //Se não existe, registra uma nova partida automaticamente
             idProximaPartida = idProximaPartida + 1;
             partidaCorrente = new Partida(idProximaPartida);
+            partidaCorrente.getTimeA().setId(CONST_ID_TIME_A);
+            partidaCorrente.getTimeB().setId(CONST_ID_TIME_B);
 
         }
     }
@@ -65,7 +67,13 @@ public class MainRules {
     }
 
     public void iniciaPartida() throws PartidaEstadoInvalidoException {
-        this.partidaCorrente.iniciar();
+
+        if (this.partidaCorrente.getEstado() == EstadoPartida.PARADA){
+            this.partidaCorrente.recomecar();
+        }else{
+            this.partidaCorrente.iniciar();
+        }
+
     }
 
     public void pausaPartida() throws PartidaEstadoInvalidoException {

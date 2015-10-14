@@ -1,6 +1,7 @@
 package aplicativo.milreuelima.iesb.com.br.futebas.entidades;
 
 import java.util.Date;
+
 import aplicativo.milreuelima.iesb.com.br.futebas.exceptions.GenericBusinessException;
 import aplicativo.milreuelima.iesb.com.br.futebas.exceptions.PartidaEstadoInvalidoException;
 
@@ -21,6 +22,8 @@ public class Partida {
     public Partida(int id){
         //Se foi instanciada uma nova partida, coloca automaticamente seu estado inicial;
         this.estado = EstadoPartida.NAO_INICIADA;
+        this.timeA = new Time();
+        this.timeB = new Time();
     }
 
     public Partida(int id, Placar placar, EstadoPartida estado, Time timeA, Time timeB, Date horaInicio){

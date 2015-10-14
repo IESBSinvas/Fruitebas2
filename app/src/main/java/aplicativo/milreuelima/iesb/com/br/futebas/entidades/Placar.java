@@ -3,7 +3,7 @@ package aplicativo.milreuelima.iesb.com.br.futebas.entidades;
 /**
  * Criado por Sinvas em 24/08/2015.
  */
-public class Placar {
+public class Placar implements Cloneable{
 
     private int golsA;
     private int golsB;
