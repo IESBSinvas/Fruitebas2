@@ -43,6 +43,7 @@ public class MainFutebasActivity extends AppCompatActivity {
         final ImageButton btnPause = (ImageButton) findViewById(R.id.pause);
 //      ImageButton btnStop = (ImageButton) findViewById(R.id.stop);
         final ImageButton btnAcrescimo = (ImageButton) findViewById(R.id.Acrescimo);
+        final TextView textAcrescimo = (TextView) findViewById(R.id.text_acrescimo);
 
         // Placar
         ImageButton btnMarcarGolCasa = (ImageButton) findViewById(R.id.marcarGolCasa);
@@ -85,6 +86,16 @@ public class MainFutebasActivity extends AppCompatActivity {
                }
            }
        });
+
+        btnAcrescimo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long horaAtual = ((SystemClock.elapsedRealtime()- cronometro.getBase())/1000)/60;
+                horafinal += horafinal + horaAtual;
+                int acrescimo = (int) (horafinal - horaAtual);
+                textAcrescimo.setText(" " + acrescimo);
+            }
+        });
 
 
 
