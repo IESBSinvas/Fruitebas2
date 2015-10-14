@@ -23,8 +23,8 @@ public class MainFutebasActivity extends AppCompatActivity {
     long tempoPausado = 0;
     int placarVisitanteContador = 0;
     int placarCasaContadoer = 0;
-    int acrescimos = 0;
     long horafinal = 10;
+    int acrescimos = 0;
 
     //SBL
     MainRules mainFutebas;
@@ -64,12 +64,24 @@ public class MainFutebasActivity extends AppCompatActivity {
            public void onChronometerTick(Chronometer chronometer) {
 
 
-               long horaAtual = ((SystemClock.elapsedRealtime()- cronometro.getBase())/1000)/60;
+               final long horaAtual = ((SystemClock.elapsedRealtime() - cronometro.getBase()) / 1000) / 60;
 
- //              String mensagem = "Hora atual " + horaAtual + "Hora Final " + horafinal;
- //              Toast.makeText(MainFutebasActivity.this, mensagem, Toast.LENGTH
- //
- // if ((horafinal <= horaAtual)) {
+
+               btnAcrescimo.setOnClickListener(new View.OnClickListener() {
+                   @Override
+
+                   //Acrescimos
+                   public void onClick(View v) {
+                       horafinal++;
+
+                       // Implemntacao para Mensagem de Acrescimo
+                       acrescimos++;
+                       textAcrescimo.setText(" " + acrescimos);
+                       String mensagem = "Adicionado  ";
+                       Toast.makeText(MainFutebasActivity.this, mensagem + acrescimos + " minutos ", Toast.LENGTH_SHORT).show();
+                   }
+               });
+
 
                try {
                    EstadoPartida estadoAtualPartida = mainFutebas.getEstadoPartidaCorrente();
@@ -82,21 +94,10 @@ public class MainFutebasActivity extends AppCompatActivity {
                        startActivity(intent);
                    }
                } catch (GenericBusinessException e) {
-                    trataGenericBusinessException(e);
+                   trataGenericBusinessException(e);
                }
            }
        });
-
-        btnAcrescimo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                long horaAtual = ((SystemClock.elapsedRealtime()- cronometro.getBase())/1000)/60;
-                horafinal += horafinal + horaAtual;
-                int acrescimo = (int) (horafinal - horaAtual);
-                textAcrescimo.setText(" " + acrescimo);
-            }
-        });
-
 
 
         btnStart.setOnClickListener(new View.OnClickListener() {
@@ -105,8 +106,7 @@ public class MainFutebasActivity extends AppCompatActivity {
                 try {
                     mainFutebas.iniciaPartida(); //SBL
 
-                    if (click)
-                    {
+                    if (click) {
                         cronometro.setBase(SystemClock.elapsedRealtime() - tempoPausado);
                         // Som de apito
                         MediaPlayer player = MediaPlayer.create(MainFutebasActivity.this, R.raw.apitodefutebol);
