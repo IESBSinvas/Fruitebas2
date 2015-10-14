@@ -14,6 +14,7 @@ public class Partida {
     private Time timeB;
     private Date horaInicio;
     private Date horaFim;
+    private Date horaFimPrevisto;
     private Placar placar;
     private EstadoPartida estado;
 
@@ -57,6 +58,19 @@ public class Partida {
         return horaFim;
     }
 
+    public Date getHoraFimPrevisto() {
+        return horaFimPrevisto;
+    }
+
+    public void setHoraFimPrevisto(Date horaFimPrevisto) throws GenericBusinessException {
+        if (!horaFimPrevisto.after(this.horaInicio)){
+            throw new GenericBusinessException("A hora de fim previsto para a partida precisa ser maior que a hora de início!");
+        }else{
+            this.horaFimPrevisto = horaFimPrevisto;
+        }
+
+    }
+
     public Placar getPlacar() {
         //Não retorna o placar diretamente para que nineguém possa alterar o placar externamente.
         Placar retorno = new Placar();
@@ -82,7 +96,7 @@ public class Partida {
         }
     }
 
-    public void Pausar() throws PartidaEstadoInvalidoException {
+    public void pausar() throws PartidaEstadoInvalidoException {
         if (this.estado == EstadoPartida.INICIADA){
 
             this.estado = EstadoPartida.PARADA;
@@ -93,7 +107,7 @@ public class Partida {
         }
     }
 
-    public void Recomecar() throws PartidaEstadoInvalidoException {
+    public void recomecar() throws PartidaEstadoInvalidoException {
         if (this.estado == EstadoPartida.PARADA){
 
             this.estado = EstadoPartida.INICIADA;
@@ -135,6 +149,26 @@ public class Partida {
 
     public void desfazUltimoGol(){
         this.placar.desfazerJogada();
+    }
+
+    public EstadoPartida avaliaFinalPartida() throws GenericBusinessException {
+        EstadoPartida retorno = this.estado;
+
+        Date horaAtual = new java.util.Date();
+
+        if (this.estado == EstadoPartida.INICIADA){
+            //Avalia se já está na hora de encerrar a partida
+            if (!horaAtual.after(this.horaFimPrevisto)){
+                try {
+                    this.finalizar();
+                } catch (PartidaEstadoInvalidoException e) {
+                    e.printStackTrace();
+                    throw new GenericBusinessException(e.getMessage());
+                }
+            }
+        }
+
+        return retorno;
     }
 
 }

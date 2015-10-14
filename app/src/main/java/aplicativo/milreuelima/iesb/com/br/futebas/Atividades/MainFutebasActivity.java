@@ -13,6 +13,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import aplicativo.milreuelima.iesb.com.br.futebas.R;
+import aplicativo.milreuelima.iesb.com.br.futebas.core.MainRules;
+import aplicativo.milreuelima.iesb.com.br.futebas.entidades.EstadoPartida;
+import aplicativo.milreuelima.iesb.com.br.futebas.exceptions.GenericBusinessException;
+import aplicativo.milreuelima.iesb.com.br.futebas.exceptions.PartidaEstadoInvalidoException;
 
 public class MainFutebasActivity extends AppCompatActivity {
     boolean click = true;
@@ -22,11 +26,16 @@ public class MainFutebasActivity extends AppCompatActivity {
     int acrescimos = 0;
     long horafinal = 10;
 
+    //SBL
+    MainRules mainFutebas;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mainFutebas = new MainRules();
 
 //      Cronometro
         final Chronometer cronometro = (Chronometer) findViewById(R.id.chronometer);
@@ -57,19 +66,23 @@ public class MainFutebasActivity extends AppCompatActivity {
                long horaAtual = ((SystemClock.elapsedRealtime()- cronometro.getBase())/1000)/60;
 
  //              String mensagem = "Hora atual " + horaAtual + "Hora Final " + horafinal;
- //              Toast.makeText(MainFutebasActivity.this, mensagem, Toast.LENGTH_LONG).show();
+ //              Toast.makeText(MainFutebasActivity.this, mensagem, Toast.LENGTH
+ //
+ // if ((horafinal <= horaAtual)) {
 
-               if ((horafinal <= horaAtual)) {
+               try {
+                   EstadoPartida estadoAtualPartida = mainFutebas.getEstadoPartidaCorrente();
 
-                   String mensagem = "Fim de Jogo!!!!";
-                   Toast.makeText(MainFutebasActivity.this, mensagem, Toast.LENGTH_LONG).show();
+                   if ((estadoAtualPartida != EstadoPartida.INICIADA) && (mainFutebas.avaliaPartida() == EstadoPartida.FINALIZADA)) {
+                       String mensagem = "Fim de Jogo!!!!";
+                       Toast.makeText(MainFutebasActivity.this, mensagem, Toast.LENGTH_LONG).show();
 
-                   Intent intent = new Intent(MainFutebasActivity.this, MainFutebasActivity.class);
-                   startActivity(intent);
-
-
+                       Intent intent = new Intent(MainFutebasActivity.this, MainFutebasActivity.class);
+                       startActivity(intent);
+                   }
+               } catch (GenericBusinessException e) {
+                    trataGenericBusinessException(e);
                }
-
            }
        });
 
@@ -78,33 +91,44 @@ public class MainFutebasActivity extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (click)
-                {
-                    cronometro.setBase(SystemClock.elapsedRealtime() - tempoPausado);
-                    // Som de apito
-                    MediaPlayer player = MediaPlayer.create(MainFutebasActivity.this, R.raw.apitodefutebol);
-                player.start();
+                try {
+                    mainFutebas.iniciaPartida(); //SBL
 
+                    if (click)
+                    {
+                        cronometro.setBase(SystemClock.elapsedRealtime() - tempoPausado);
+                        // Som de apito
+                        MediaPlayer player = MediaPlayer.create(MainFutebasActivity.this, R.raw.apitodefutebol);
+                        player.start();
+
+                    }
+                    cronometro.start();
+                    btnPause.setEnabled(true);
+                    btnStart.setEnabled(false);
+                    btnAcrescimo.setEnabled(true);
+                } catch (PartidaEstadoInvalidoException e) {
+                    trataGenericBusinessException(e);
                 }
-
-                cronometro.start();
-                btnPause.setEnabled(true);
-                btnStart.setEnabled(false);
-                btnAcrescimo.setEnabled(true);
             }
-        });;
+        });
 
         btnPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                tempoPausado = (SystemClock.elapsedRealtime() - cronometro.getBase());
-                click = true;
-                cronometro.stop();
+                try {
+                    mainFutebas.pausaPartida();
 
-                btnPause.setEnabled(false);
-                btnStart.setEnabled(true);
-                btnAcrescimo.setEnabled(true);
+                    tempoPausado = (SystemClock.elapsedRealtime() - cronometro.getBase());
+                    click = true;
+                    cronometro.stop();
+
+                    btnPause.setEnabled(false);
+                    btnStart.setEnabled(true);
+                    btnAcrescimo.setEnabled(true);
+                } catch (PartidaEstadoInvalidoException e) {
+                    trataGenericBusinessException(e);
+                }
             }
         });
 /*
@@ -116,6 +140,7 @@ public class MainFutebasActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 click = true;
+                mainFutebas.encerraPartida();
                 cronometro.stop();
                 cronometro.setText("00:00");
 
@@ -128,22 +153,33 @@ public class MainFutebasActivity extends AppCompatActivity {
         btnMarcarGolCasa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                placarCasaContadoer = placarCasaContadoer + 1;
+                //placarCasaContadoer = placarCasaContadoer + 1;
+                try {
+                    mainFutebas.registraGol(mainFutebas.CONST_ID_TIME_A, 0);
+                    placarCasaContadoer = mainFutebas.getPlacarPartidaCorrente().getGolsA();
 
-                textoPlacarCasa.setText(" " + placarCasaContadoer + " ");
+                    textoPlacarCasa.setText(" " + placarCasaContadoer + " ");
+                } catch (GenericBusinessException e) {
+                    trataGenericBusinessException(e);
+                }
             }
         });
 
         btnMarcarGolVisitante.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                placarVisitanteContador = placarVisitanteContador + 1;
-                textoPlacarVisitante.setText(" " + placarVisitanteContador + " ");
+                //placarVisitanteContador = placarVisitanteContador + 1;
+                try {
+                    mainFutebas.registraGol(mainFutebas.CONST_ID_TIME_B, 0);
+                    placarVisitanteContador = mainFutebas.getPlacarPartidaCorrente().getGolsB();
+
+                    textoPlacarVisitante.setText(" " + placarVisitanteContador + " ");
+                } catch (GenericBusinessException e) {
+                    trataGenericBusinessException(e);
+                }
             }
         });
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -160,35 +196,46 @@ public class MainFutebasActivity extends AppCompatActivity {
 
         int idSelecionado = item.getItemId();
 
-        switch (idSelecionado) {
-            case R.id.menu_novo_jogo:
-                pararCronometro.stop();
-                Intent intentNovoJogo = new Intent(this, MainFutebasActivity.class);
-                startActivity(intentNovoJogo);
-            break;
-           case R.id.menu_pagamento:
-                pararCronometro.stop();
-              Intent intentPagamento = new Intent(this, Pagamento.class);
-              startActivity(intentPagamento);
-                break;
-            case R.id.menu_preferencias:
-                pararCronometro.stop();
-                Intent intentPreferencia = new Intent(this, Preferencias.class);
-                startActivity(intentPreferencia);
-                break;
-            case R.id.menu_espera:
-                pararCronometro.stop();
-                Intent intentListaJogador = new Intent(this, ListaJogadores.class);
-                startActivity(intentListaJogador);
-                break;
+        try {
+            switch (idSelecionado) {
+                case R.id.menu_novo_jogo:
+                    this.mainFutebas.prepararNovaPartida();
+
+                    pararCronometro.stop();
+                    Intent intentNovoJogo = new Intent(this, MainFutebasActivity.class);
+                    startActivity(intentNovoJogo);
+                    break;
+
+               case R.id.menu_pagamento:
+                    pararCronometro.stop();
+                    Intent intentPagamento = new Intent(this, Pagamento.class);
+                    startActivity(intentPagamento);
+                    break;
+                case R.id.menu_preferencias:
+                    pararCronometro.stop();
+                    Intent intentPreferencia = new Intent(this, Preferencias.class);
+                    startActivity(intentPreferencia);
+                    break;
+                case R.id.menu_espera:
+                    pararCronometro.stop();
+                    Intent intentListaJogador = new Intent(this, ListaJogadores.class);
+                    startActivity(intentListaJogador);
+                    break;
 
 
-            default:
-                break;
+                default:
+                    break;
+            }
+
+        } catch (GenericBusinessException e) {
+            trataGenericBusinessException(e);
         }
-
         return super.onOptionsItemSelected(item);
     }
 
+    private void trataGenericBusinessException(Exception e){
+        e.printStackTrace();
+        Toast.makeText(MainFutebasActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+    }
 
 }
