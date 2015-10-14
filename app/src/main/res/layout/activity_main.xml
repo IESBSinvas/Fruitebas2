@@ -124,7 +124,17 @@
         android:orientation="vertical"
 
         >
+        <TextView
+
+            android:id="@+id/text_acrescimo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="#FF0000"
+            />
         <Chronometer
+
+
 
             android:id="@+id/chronometer"
             android:layout_width="match_parent"
@@ -139,12 +149,7 @@
             android:gravity="center|top"
             />
 
-        <TextView android:text="@string/Futebas"
-            android:id="@+id/text_acrescimo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            />
+
     </LinearLayout>
 
 </LinearLayout>
