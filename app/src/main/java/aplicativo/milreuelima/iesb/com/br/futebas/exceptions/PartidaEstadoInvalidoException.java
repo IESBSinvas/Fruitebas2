@@ -11,4 +11,9 @@ public class PartidaEstadoInvalidoException extends Exception{
     public PartidaEstadoInvalidoException(AcaoPartida acaoDesejada, Partida partida){
         super("Não é possível " + acaoDesejada.getNome() + " a partida, pois a mesma está " + partida.getEstado().getNome() + "!");
     }
+
+    public PartidaEstadoInvalidoException(AcaoPartida acaoDesejada, Partida partida, Throwable throwable){
+        super("Não é possível " + acaoDesejada.getNome() + " a partida, pois a mesma está " + partida.getEstado().getNome() + "!", throwable);
+    }
+
 }

@@ -21,9 +21,7 @@ public class Partida {
 
     public Partida(int id){
         //Se foi instanciada uma nova partida, coloca automaticamente seu estado inicial;
-        this.estado = EstadoPartida.NAO_INICIADA;
-        this.timeA = new Time();
-        this.timeB = new Time();
+        this(id, new Placar(0, 0), EstadoPartida.NAO_INICIADA, new Time(), new Time(), new java.util.Date());
     }
 
     public Partida(int id, Placar placar, EstadoPartida estado, Time timeA, Time timeB, Date horaInicio){
@@ -37,6 +35,12 @@ public class Partida {
         this.horaInicio = horaInicio;
     }
 
+    public Partida(int id, Placar placar, EstadoPartida estado, Time timeA, Time timeB, Date horaInicio, Date horaFim){
+        //Se é uma partida carregada da base, seta seus valores.
+
+        this(id, placar, estado, timeA, timeB, horaInicio);
+        this.horaFim = horaFim;
+    }
     public EstadoPartida getEstado() {
         return estado;
     }
@@ -66,7 +70,7 @@ public class Partida {
     }
 
     public void setHoraFimPrevisto(Date horaFimPrevisto) throws GenericBusinessException {
-        if (!horaFimPrevisto.after(this.horaInicio)){
+        if (horaFimPrevisto != null && !horaFimPrevisto.after(this.horaInicio)){
             throw new GenericBusinessException("A hora de fim previsto para a partida precisa ser maior que a hora de início!");
         }else{
             this.horaFimPrevisto = horaFimPrevisto;

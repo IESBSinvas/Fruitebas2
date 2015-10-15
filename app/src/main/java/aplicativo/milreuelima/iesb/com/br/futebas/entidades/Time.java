@@ -4,14 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Sinvas on 25/08/2015.
+ * Criado por Sinvas em 25/08/2015.
  */
 public class Time {
     private int id;
     private String nome;
     private List<JogadorTime> jogadores;
 
-    Time(){
+    public Time(){
+        this(0);
+    }
+
+    public Time(int id){
+        this.id = id;
         jogadores = new ArrayList<>();
     }
 

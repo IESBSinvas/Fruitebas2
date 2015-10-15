@@ -10,9 +10,17 @@ public class Placar implements Cloneable{
     private TimesPlacar timeUltimoGol;
 
     public Placar() {
-        this.golsA = 0;
-        this.golsB = 0;
-        timeUltimoGol = TimesPlacar.TIME_INDEFINIDO;
+        this(0, 0);
+    }
+
+    public Placar(int golsA, int golsB) {
+        this(golsA, golsB, TimesPlacar.TIME_INDEFINIDO);
+    }
+
+    public Placar(int golsA, int golsB, TimesPlacar timeUltimoGol) {
+        this.golsA = golsA;
+        this.golsB = golsB;
+        this.timeUltimoGol = timeUltimoGol;
     }
 
     public int getGolsA() {

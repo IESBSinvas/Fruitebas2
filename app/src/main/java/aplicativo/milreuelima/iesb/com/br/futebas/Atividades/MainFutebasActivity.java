@@ -35,7 +35,11 @@ public class MainFutebasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mainFutebas = new MainRules();
+        try {
+            mainFutebas = new MainRules(this);
+        } catch (GenericBusinessException e) {
+            trataGenericBusinessException(e);
+        }
 
 //      Cronometro
         final Chronometer cronometro = (Chronometer) findViewById(R.id.chronometer);

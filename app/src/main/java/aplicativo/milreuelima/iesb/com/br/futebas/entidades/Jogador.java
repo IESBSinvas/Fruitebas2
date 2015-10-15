@@ -3,13 +3,22 @@ package aplicativo.milreuelima.iesb.com.br.futebas.entidades;
 import java.util.Date;
 
 /**
- * Created by Sinvas on 25/08/2015.
+ * Criado por Sinvas em 25/08/2015.
  */
 public class Jogador {
 
     private int id;
     private String nome;
     private String telefone;
+
+   public Jogador(){
+       super();
+   }
+
+   public Jogador(int id){
+       this();
+       this.setId(id);
+   }
 
     public int getId() {
         return id;
