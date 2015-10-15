@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Fruitebas2.iml" filepath="$PROJECT_DIR$/Fruitebas2.iml" />
       <module fileurl="file://$PROJECT_DIR$/Fruitebas20.iml" filepath="$PROJECT_DIR$/Fruitebas20.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Fruitebas200.iml" filepath="$PROJECT_DIR$/Fruitebas200.iml" />
       <module fileurl="file://$PROJECT_DIR$/Futebas.iml" filepath="$PROJECT_DIR$/Futebas.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

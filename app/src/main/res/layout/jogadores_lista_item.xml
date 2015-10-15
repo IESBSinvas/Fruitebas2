@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
-    android:background="@drawable/retangular_redondo"
+    android:background="@drawable/iconeacrescimo"
     android:paddingLeft="10dp">
     <TextView
         android:layout_width="wrap_content"
@@ -29,15 +29,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/jogadores_lista_item_star"
-        android:src="@drawable/ic_action_star_0"
+        android:src="@drawable/maisum"
         android:background="@null"
         android:layout_marginLeft="20dp" />
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/jogadores_lista_item_menos"
-        android:src="@drawable/ic_action_minus"
-        android:background="@drawable/redondo"
+        android:src="@drawable/maisum"
+        android:background="@drawable/newgame"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp" />
 
