@@ -1,6 +1,7 @@
 package aplicativo.milreuelima.iesb.com.br.futebas.core;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import aplicativo.milreuelima.iesb.com.br.futebas.entidades.AcaoPartida;
@@ -135,16 +136,18 @@ public class MainRules {
     }
 
     public void registraGol(int idTime, int idJogador) throws GenericBusinessException {
-        if (idTime == this.partidaCorrente.getTimeA().getId()){
-            this.partidaCorrente.registrarGolTimeA(idJogador);
-        }else{
-            this.partidaCorrente.registrarGolTimeB(idJogador);
-        }
+        if (this.partidaCorrente.getEstado() == EstadoPartida.INICIADA) {
+            if (idTime == this.partidaCorrente.getTimeA().getId()) {
+                this.partidaCorrente.registrarGolTimeA(idJogador);
+            } else {
+                this.partidaCorrente.registrarGolTimeB(idJogador);
+            }
 
-        try {
-            partidaCorrente = dbHelper.gravaPartidaEvento(partidaCorrente, eventoCorrente);
-        } catch (GenericDatabaseException e) {
-            throw new GenericBusinessException(e.getMessage());
+            try {
+                partidaCorrente = dbHelper.gravaPartidaEvento(partidaCorrente, eventoCorrente);
+            } catch (GenericDatabaseException e) {
+                throw new GenericBusinessException(e.getMessage());
+            }
         }
     }
 
@@ -158,6 +161,19 @@ public class MainRules {
         //TODO: escrever o código que busca no BD aqui
 
         return retorno;
+    }
+
+    public long retornaTempoDecorridoPartida(){
+        return this.partidaCorrente.getTempoDecorrido().getTime();
+    }
+
+    public void setaTempoDecorridoPartida(long tempo) throws GenericBusinessException {
+        this.partidaCorrente.setTempoDecorrido(new Date(tempo));
+        try {
+            partidaCorrente = dbHelper.gravaPartidaEvento(partidaCorrente, eventoCorrente);
+        } catch (GenericDatabaseException e) {
+            throw new GenericBusinessException(e.getMessage());
+        }
     }
 
     //Avalia se já está na hora de encerrar esta partida

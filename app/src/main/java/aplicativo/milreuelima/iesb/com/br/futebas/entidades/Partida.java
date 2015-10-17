@@ -18,6 +18,7 @@ public class Partida {
     private Date horaFimPrevisto;
     private Placar placar;
     private EstadoPartida estado;
+    private Date tempoDecorrido;
 
     public Partida(int id){
         //Se foi instanciada uma nova partida, coloca automaticamente seu estado inicial;
@@ -77,6 +78,15 @@ public class Partida {
         }
 
     }
+
+    public Date getTempoDecorrido() {
+        return tempoDecorrido;
+    }
+
+    public void setTempoDecorrido(Date tempoDecorrido) {
+        this.tempoDecorrido = tempoDecorrido;
+    }
+
 
     public Placar getPlacar() {
         //Não retorna o placar diretamente para que nineguém possa alterar o placar externamente.
@@ -154,6 +164,10 @@ public class Partida {
        }
     }
 
+    private void calculaTempoDecorrido(){
+        //this.tempoDecorrido = (java.util.Date().getTime()) - this.horaInicio;
+       // java.util.Calendar.
+    }
     public void desfazUltimoGol(){
         this.placar.desfazerJogada();
     }

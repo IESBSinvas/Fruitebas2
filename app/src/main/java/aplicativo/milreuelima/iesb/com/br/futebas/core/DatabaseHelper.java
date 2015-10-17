@@ -52,7 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             db.execSQL("CREATE TABLE IF NOT EXISTS jogador_time (posicao_fila_time INTEGER, id_jogador INTEGER, id_time INTEGER);");
 
             db.execSQL("CREATE TABLE IF NOT EXISTS partida (_id INTEGER PRIMARY KEY, id_evento INTEGER, id_time_a INTEGER, id_time_b INTEGER, data LONG, hora_inicio LONG, hora_fim LONG, " +
-                    "gols_time_a INTEGER, gols_time_b INTEGER, estado INTEGER, hora_fim_previsto LONG);");
+                    "gols_time_a INTEGER, gols_time_b INTEGER, estado INTEGER, hora_fim_previsto LONG, tempo_decorrido LONG);");
 
         }catch (Exception e){
             Toast.makeText(this.context, "Ocorreu um erro ao criar estruturas de dados. " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -138,7 +138,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         try {
 
-            cursorPartida = db.rawQuery("SELECT _id, id_time_a, id_time_b, hora_inicio, hora_fim, gols_time_a, gols_time_b, estado, hora_fim_previsto FROM partida WHERE id_evento = " +
+            cursorPartida = db.rawQuery("SELECT _id, id_time_a, id_time_b, hora_inicio, hora_fim, gols_time_a, gols_time_b, estado, hora_fim_previsto, tempo_decorrido FROM partida WHERE id_evento = " +
                                          idEvento + " AND estado IN (" + retornaInClauseEstados(listaEstados) + ") ORDER BY hora_inicio DESC", null);
             cursorPartida.moveToFirst();
 
@@ -152,6 +152,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 retorno = new Partida(cursorPartida.getInt(0), placar, EstadoPartida.values()[cursorPartida.getInt(7)], timeA, timeB, new Date(cursorPartida.getLong(3)));
                 if (!cursorPartida.isNull(8)) {
                     retorno.setHoraFimPrevisto(new Date(cursorPartida.getLong(8)));
+                }
+                if (!cursorPartida.isNull(9)) {
+                    retorno.setTempoDecorrido(new Date(cursorPartida.getLong(9)));
+                }else{
+                    retorno.setTempoDecorrido(new Date(0));
                 }
             }else{
 
@@ -195,6 +200,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     value.put("hora_fim_previsto", partida.getHoraFimPrevisto().getTime());
                 }
 
+                if (partida.getTempoDecorrido() != null){
+                    value.put("tempo_decorrido", partida.getTempoDecorrido().getTime());
+                }
                 result =  db.update("partida", value, "_id =" + partida.getId(), null );
 
                 if (result == -1) {
@@ -219,6 +227,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 value.put("estado", partida.getEstado().getId());
                 if (partida.getHoraFimPrevisto() != null){
                     value.put("hora_fim_previsto", partida.getHoraFimPrevisto().getTime());
+                }
+
+                if (partida.getTempoDecorrido() != null){
+                    value.put("tempo_decorrido", partida.getTempoDecorrido().getTime());
                 }
 
                 result = db.insert("partida", null, value);
