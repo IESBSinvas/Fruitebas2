@@ -22,6 +22,7 @@ public class JogadorEvento extends Jogador {
     }
 
     public void adicionaGol(){
+
         this.numeroGols = this.numeroGols + 1;
     }
 }

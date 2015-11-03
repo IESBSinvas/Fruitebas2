@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import aplicativo.milreuelima.iesb.com.br.futebas.entidades.Configuracao;
 import aplicativo.milreuelima.iesb.com.br.futebas.entidades.EstadoPartida;
 import aplicativo.milreuelima.iesb.com.br.futebas.entidades.Evento;
 import aplicativo.milreuelima.iesb.com.br.futebas.entidades.Jogador;
@@ -18,6 +19,8 @@ import aplicativo.milreuelima.iesb.com.br.futebas.entidades.Partida;
 import aplicativo.milreuelima.iesb.com.br.futebas.entidades.Placar;
 import aplicativo.milreuelima.iesb.com.br.futebas.entidades.Time;
 import aplicativo.milreuelima.iesb.com.br.futebas.exceptions.GenericDatabaseException;
+
+import aplicativo.milreuelima.iesb.com.br.futebas.core.FutebasDefaultValues;
 
 import java.util.Date;
 
@@ -44,18 +47,136 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         //db.execSQL("CREATE TABLE historico (_id INTEGER PRIMARY KEY, idusuario TEXT, datahora TEXT, pontuacao TEXT);");
 
         try {
-            db.execSQL("CREATE TABLE IF NOT EXISTS jogador (_id INTEGER PRIMARY KEY, nome TEXT, telefone TEXT);");
-            db.execSQL("CREATE TABLE IF NOT EXISTS evento (_id INTEGER PRIMARY KEY, nome TEXT, data TEXT, local TEXT, id_organizador INTEGER);");
-            db.execSQL("CREATE TABLE IF NOT EXISTS jogador_evento (id_jogador INTEGER, id_evento INTEGER, hora_chegada LONG, numero_gols INTEGER, numero_faltas INTEGER, UNIQUE(id_jogador, id_evento));");
+            db.execSQL("CREATE TABLE IF NOT EXISTS jogador (_id INTEGER PRIMARY KEY, " +
+                                                            "nome TEXT, " +
+                                                            "telefone TEXT);");
 
-            db.execSQL("CREATE TABLE IF NOT EXISTS time (_id INTEGER PRIMARY KEY, nome TEXT);");
-            db.execSQL("CREATE TABLE IF NOT EXISTS jogador_time (posicao_fila_time INTEGER, id_jogador INTEGER, id_time INTEGER);");
+            db.execSQL("CREATE TABLE IF NOT EXISTS evento (_id INTEGER PRIMARY KEY, " +
+                                                            "nome TEXT, " +
+                                                            "data TEXT, " +
+                                                            "local TEXT, " +
+                                                            "id_organizador INTEGER);");
 
-            db.execSQL("CREATE TABLE IF NOT EXISTS partida (_id INTEGER PRIMARY KEY, id_evento INTEGER, id_time_a INTEGER, id_time_b INTEGER, data LONG, hora_inicio LONG, hora_fim LONG, " +
-                    "gols_time_a INTEGER, gols_time_b INTEGER, estado INTEGER, hora_fim_previsto LONG, tempo_decorrido LONG);");
+            db.execSQL("CREATE TABLE IF NOT EXISTS jogador_evento (id_jogador INTEGER, " +
+                                                            "id_evento INTEGER, " +
+                                                            "hora_chegada LONG, " +
+                                                            "numero_gols INTEGER, " +
+                                                            "numero_faltas INTEGER, " +
+                                                            "UNIQUE(id_jogador, id_evento));");
+
+            db.execSQL("CREATE TABLE IF NOT EXISTS time (_id INTEGER PRIMARY KEY, " +
+                                                         "nome TEXT);");
+
+            db.execSQL("CREATE TABLE IF NOT EXISTS jogador_time (posicao_fila_time INTEGER, " +
+                                                                "id_jogador INTEGER, " +
+                                                                "id_time INTEGER);");
+
+            db.execSQL("CREATE TABLE IF NOT EXISTS partida (_id INTEGER PRIMARY KEY, " +
+                                                            "id_evento INTEGER, " +
+                                                            "id_time_a INTEGER, " +
+                                                            "id_time_b INTEGER, " +
+                                                            "data LONG, " +
+                                                            "hora_inicio LONG, " +
+                                                            "hora_fim LONG, " +
+                                                            "gols_time_a INTEGER, " +
+                                                            "gols_time_b INTEGER, " +
+                                                            "estado INTEGER, " +
+                                                            "hora_fim_previsto LONG, " +
+                                                            "tempo_decorrido LONG);");
+
+            db.execSQL("CREATE TABLE IF NOT EXISTS configuracao (_id INTEGER PRIMARY KEY, " +
+                                                                "num_min_jogadores INTEGER, " +
+                                                                "num_max_jogadores INTEGER);");
+
+            carregaConfiguracoesIniciais(db);
 
         }catch (Exception e){
             Toast.makeText(this.context, "Ocorreu um erro ao criar estruturas de dados. " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void carregaConfiguracoesIniciais(SQLiteDatabase db){
+
+        Cursor cursorConfiguracao = null;
+        long result = 0;
+
+        try {
+
+            cursorConfiguracao = db.rawQuery("SELECT _id, num_min_jogadores, num_max_jogadores FROM configuracao WHERE id_evento = 1)", null);
+            cursorConfiguracao.moveToFirst();
+
+            if (cursorConfiguracao.getCount() == 0){
+                //Já que mão existe regitro de configuracao, cria um com os valores padrão
+
+                ContentValues value = new ContentValues();
+
+                value.put("num_min_jogadores", FutebasDefaultValues.QTD_MIN_JOGADORES_TIME);
+                value.put("num_max_jogadores", FutebasDefaultValues.QTD_MAX_JOGADORES_TIME);
+
+                result = db.insert("configuracao", null, value);
+
+                if (result == -1) {
+                    throw new Exception("Erro ao gravar configurações iniciais!");
+                }
+            }
+        }catch (Exception ex){
+
+        }finally {
+            if(cursorConfiguracao != null){ cursorConfiguracao.close();}
+        }
+    }
+
+    public Configuracao carregaConfiguracoes(){
+        Configuracao retorno = new Configuracao();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursorConfiguracao = null;
+        long result = 0;
+
+        try {
+
+            cursorConfiguracao = db.rawQuery("SELECT _id, num_min_jogadores, num_max_jogadores FROM configuracao WHERE id_evento = 1", null);
+            cursorConfiguracao.moveToFirst();
+
+            if (cursorConfiguracao.getCount() >= 1){
+                //Recupera o registro mais recente
+                retorno.setNumeroMinimoJogadores(cursorConfiguracao.getInt(1));
+                retorno.setNumeroMaximoJogadores(cursorConfiguracao.getInt(2));
+            }
+        }catch (Exception ex){
+             retorno = new Configuracao();
+            retorno.setNumeroMinimoJogadores(FutebasDefaultValues.QTD_MIN_JOGADORES_TIME);
+            retorno.setNumeroMaximoJogadores(FutebasDefaultValues.QTD_MAX_JOGADORES_TIME);
+
+        }finally {
+            if(cursorConfiguracao != null){ cursorConfiguracao.close();}
+        }
+
+        return retorno;
+    }
+
+    public void gravaConfiguracao(Configuracao conf) throws GenericDatabaseException {
+        Partida retorno;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        long result;
+
+        try {
+
+            ContentValues value = new ContentValues();
+
+            value.put("num_min_jogadores", conf.getNumeroMinimoJogadores());
+            value.put("num_max_jogadores", conf.getNumeroMaximoJogadores());
+
+            result =  db.update("configuracao", value, "_id = 1", null );
+
+            if (result == -1) {
+                throw new Exception("Erro ao gravar configuração!");
+            }
+
+        }catch (Exception ex){
+            throw new GenericDatabaseException(ex.getMessage());
         }
     }
 
@@ -171,6 +292,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return retorno;
     }
 
+    private String retornaInClauseEstados(List<EstadoPartida> lista){
+
+        short i = 0;
+        String retorno = "";
+        for (EstadoPartida e : lista) {
+            if (i > 0){ retorno = retorno + ", ";}
+            retorno = retorno + e.getId();
+            i++;
+        }
+        return retorno;
+    }
+
+
+
+
     public Partida gravaPartidaEvento(Partida partida, Evento evento) throws GenericDatabaseException {
 
         Partida retorno;
@@ -250,20 +386,5 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return retorno;
 
-    }
-
-
-
-
-    private String retornaInClauseEstados(List<EstadoPartida> lista){
-
-        short i = 0;
-        String retorno = "";
-        for (EstadoPartida e : lista) {
-            if (i > 0){ retorno = retorno + ", ";}
-            retorno = retorno + e.getId();
-            i++;
-        }
-        return retorno;
     }
 }

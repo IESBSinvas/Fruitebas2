@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import aplicativo.milreuelima.iesb.com.br.futebas.entidades.AcaoPartida;
+import aplicativo.milreuelima.iesb.com.br.futebas.entidades.Configuracao;
 import aplicativo.milreuelima.iesb.com.br.futebas.entidades.EstadoPartida;
 import aplicativo.milreuelima.iesb.com.br.futebas.entidades.Evento;
 import aplicativo.milreuelima.iesb.com.br.futebas.entidades.Partida;
@@ -24,6 +25,7 @@ public class MainRules {
     private Context context;
     private DatabaseHelper dbHelper;
     private SQLiteDatabase db;
+    private Configuracao conf;
 
     public final int CONST_ID_TIME_A = 1;
     public final int CONST_ID_TIME_B = 2;
@@ -38,6 +40,9 @@ public class MainRules {
 
         this.context = context;
         dbHelper = new DatabaseHelper(this.context);
+
+        //Recupera configurações básicas
+        conf = dbHelper.carregaConfiguracoes();
 
         //Retorna evento de hoje se houver
         eventoCorrente = dbHelper.retornaEvento();
