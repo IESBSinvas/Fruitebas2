@@ -136,7 +136,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         try {
 
-            cursorConfiguracao = db.rawQuery("SELECT _id, num_min_jogadores, num_max_jogadores FROM configuracao WHERE id_evento = 1", null);
+            cursorConfiguracao = db.rawQuery("SELECT _id, num_min_jogadores, num_max_jogadores FROM configuracao WHERE _id = 1", null);
             cursorConfiguracao.moveToFirst();
 
             if (cursorConfiguracao.getCount() >= 1){

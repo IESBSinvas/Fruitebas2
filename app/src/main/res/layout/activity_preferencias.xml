@@ -7,11 +7,210 @@
 
     tools:context="aplicativo.milreuelima.iesb.com.br.futebas.Atividades.Preferencias"
     android:background="@drawable/back_verde"
+    android:orientation="vertical"
     >
 
-    <TextView android:text="Preferencia" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
 
+        <TextView android:text="Times" android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:id="@+id/lbTimesSection" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView android:text="Número mínimo de jogadores para iniciar uma partida" android:layout_width="279dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:textSize="16dp"
+                android:layout_gravity="right"
+                android:id="@+id/lbNumMinJogadores" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/nmMinJog"
+                android:text="03"
+                android:textSize="30dp"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:textAlignment="gravity"
+                android:gravity="right" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:weightSum="1"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:text="Número máximo de jogadores para iniciar uma partida"
+                android:layout_width="279dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp"
+                android:textSize="16dp"
+                android:layout_gravity="right"
+                android:id="@+id/lbNumMaxJogadores" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/nmMaxJog"
+                android:text="07"
+                android:textSize="30dp"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:textAlignment="gravity"
+                android:gravity="right" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1" >
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_gravity="center_horizontal"
+            android:background="#905d5d5d" />
+
+        <TextView
+            android:text="Partidas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:id="@+id/lbPartidasSection" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="15dp">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1 tempo"
+                android:id="@+id/rbUmTempo"
+                android:checked="true"
+                android:paddingRight="50dp"
+                android:paddingLeft="5dp" />
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2 tempos"
+                android:id="@+id/rbDoisTempos"
+                android:checked="false"
+                android:paddingLeft="5dp" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1" >
+
+            <TextView
+                android:text="Duração de cada tempo"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="25dp"
+                android:textSize="16dp"
+                android:layout_gravity="right"
+                android:id="@+id/lbDuracaoTempos" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:id="@+id/txtDuracaoTempos"
+                android:text="00:30"
+                android:textSize="30dp"
+                android:layout_weight="1"
+                android:layout_marginRight="5dp"
+                android:textAlignment="gravity"
+                android:gravity="right"
+                android:inputType="time" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1" >
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_gravity="center_horizontal"
+            android:background="#905d5d5d" />
+
+        <TextView
+            android:text="Geral"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:id="@+id/lbGeralSection" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1" >
+
+            <TextView
+                android:text="Recupera partida em andamento ao iniciar o app"
+                android:layout_width="241dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="25dp"
+                android:textSize="16dp"
+                android:layout_gravity="right"
+                android:id="@+id/lbRecuperaPartida"
+                android:layout_weight="0.25"
+                android:layout_marginRight="70dp" />
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ckRecuperaPartida"
+                android:checked="true"
+                android:layout_gravity="left|center_vertical"
+                android:paddingRight="10dp"
+                android:gravity="left"
+                android:layout_marginRight="10dp" />
+
+        </LinearLayout>
+    </LinearLayout>
 
 
 </LinearLayout>
