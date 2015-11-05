@@ -66,7 +66,8 @@ public class ListaJogadores extends AppCompatActivity implements
     }
 
     @Override
-    public void onTabReselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {}
+    public void onTabReselected(ActionBar.Tab tab, android.support.v4.app.FragmentTransaction fragmentTransaction) {
+    }
 
     /**
      * Métodos anteriormente criados

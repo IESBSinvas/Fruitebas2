@@ -15,7 +15,7 @@
             android:layout_weight="1"
             android:layout_marginRight="5dp"
             android:divider="@null"
-            android:background="@drawable/iconeacrescimo"/>
+            android:background="@drawable/retangular_redondo"/>
         <ListView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:layout_marginLeft="5dp"
             android:divider="@null"
-            android:background="@drawable/iconeacrescimo"/>
+            android:background="@drawable/retangular_redondo"/>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/lista_equipes_proximos"
         android:layout_marginTop="20dp"
-        android:background="@drawable/iconeacrescimo"
+        android:background="@drawable/retangular_redondo"
         android:layout_weight="1" />
 
 </LinearLayout>
