@@ -103,4 +103,5 @@ public class EquipesFragment extends Fragment {
         listaViewProximos.setAdapter(listaEquipesTimesAdapter);
     }
 
+
 }

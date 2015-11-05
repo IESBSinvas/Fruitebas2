@@ -59,12 +59,14 @@ public class JogadoresFragment extends Fragment {
         df = new SimpleDateFormat("h:mm a");
         nome = (EditText) getView().findViewById(R.id.jogadores_inclui_form);
         JogadorLista inclui = new JogadorLista();
-        inclui.setNome(nome.getText().toString());
-        inclui.setData(df.format(Calendar.getInstance().getTime()));
-        gerenciaBase.InserirJogador(inclui);
-        atualizaLista();
-        nome.setText("");
-        Toast.makeText(getActivity(),"Novo jogador incluído :)",Toast.LENGTH_SHORT).show();
+        if(!nome.getText().toString().matches("")){
+            inclui.setNome(nome.getText().toString());
+            inclui.setData(df.format(Calendar.getInstance().getTime()));
+            gerenciaBase.InserirJogador(inclui);
+            atualizaLista();
+            nome.setText("");
+            Toast.makeText(getActivity(),"Novo jogador incluído :)",Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void atualizaLista(){
