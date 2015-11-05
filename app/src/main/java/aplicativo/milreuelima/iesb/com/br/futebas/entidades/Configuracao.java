@@ -1,9 +1,11 @@
 package aplicativo.milreuelima.iesb.com.br.futebas.entidades;
 
+import java.io.Serializable;
+
 /**
  * Criado por Sinvas em 02/11/2015.
  */
-public class Configuracao {
+public class Configuracao implements Serializable{
     private int numeroMinimoJogadores;
     private int numeroMaximoJogadores;
 

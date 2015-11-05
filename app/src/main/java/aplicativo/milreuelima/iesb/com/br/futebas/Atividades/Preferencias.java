@@ -5,15 +5,37 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import aplicativo.milreuelima.iesb.com.br.futebas.R;
+import aplicativo.milreuelima.iesb.com.br.futebas.core.MainRules;
+import aplicativo.milreuelima.iesb.com.br.futebas.entidades.Configuracao;
 
 public class Preferencias extends AppCompatActivity {
+
+
+    private MainRules mainFutebas = null;
+    private Configuracao conf = null;
+    private EditText editTextMinJogadores;
+    private EditText editTextMaxJogadores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(aplicativo.milreuelima.iesb.com.br.futebas.R.layout.activity_preferencias);
+
+        conf = (Configuracao) getIntent().getSerializableExtra("conf");
+        //conf = mainFutebas.getConfiguracao();
+
+        //Assinalando objetos da tela
+        editTextMinJogadores = (EditText)findViewById(R.id.nmMinJog);
+        editTextMaxJogadores = (EditText)findViewById(R.id.nmMaxJog);
+
+        editTextMinJogadores.setText(String.valueOf(conf.getNumeroMinimoJogadores()));
+        editTextMaxJogadores.setText(String.valueOf(conf.getNumeroMaximoJogadores()));
+
+
     }
 
     @Override
@@ -53,5 +75,25 @@ public class Preferencias extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        Intent itRetorno = new Intent();
+
+        conf.setNumeroMinimoJogadores(Integer.valueOf(editTextMinJogadores.getText().toString()));
+        conf.setNumeroMaximoJogadores(Integer.valueOf(editTextMaxJogadores.getText().toString()));
+        itRetorno.putExtra("conf", conf);
+
+        Preferencias.this.setResult(RESULT_OK, itRetorno);
+        Preferencias.this.finish();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+
     }
 }

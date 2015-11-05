@@ -1,5 +1,6 @@
 package aplicativo.milreuelima.iesb.com.br.futebas.core;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +21,7 @@ import android.database.sqlite.SQLiteDatabase;
 /**
  * Criado por Sinvas em 13/10/2015.
  */
-public class MainRules {
+public class MainRules implements Serializable {
 
     private Context context;
     private DatabaseHelper dbHelper;
@@ -75,6 +76,19 @@ public class MainRules {
                 throw new GenericBusinessException(e.getMessage());
             }
 
+        }
+    }
+
+    public Configuracao getConfiguracao(){
+        return this.conf;
+    }
+
+    public void salvaConfiguracoes() throws GenericBusinessException {
+
+        try {
+            dbHelper.gravaConfiguracao(this.conf);
+        } catch (GenericDatabaseException e) {
+            throw new GenericBusinessException("Houve um problema ao gravar suas configurações!");
         }
     }
 
@@ -157,13 +171,13 @@ public class MainRules {
     }
 
     public void registraFalta(int idJogador){
-        //TODO: Colocar código aqui
+        //TODO: Quando lançar a versão que controla faltas colocar o código aqui.
     }
 
     public List<Partida> consultarPartidas(){
         List<Partida> retorno = new ArrayList<>();
 
-        //TODO: escrever o código que busca no BD aqui
+        //TODO: Quando lançar versão que controla múltiplas partidas escrever o código que busca no BD aqui
 
         return retorno;
     }

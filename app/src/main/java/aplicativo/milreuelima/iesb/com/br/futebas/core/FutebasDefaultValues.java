@@ -9,4 +9,7 @@ public class FutebasDefaultValues {
     public static final int QTD_MIN_JOGADORES_TIME = 3;
     public static final int QTD_MAX_JOGADORES_TIME = 5;
 
+    public static final int REQUEST_CODE_PREFERENCIAS = 200;
+
+
 }

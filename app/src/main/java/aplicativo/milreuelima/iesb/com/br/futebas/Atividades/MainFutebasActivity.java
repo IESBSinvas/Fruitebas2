@@ -13,7 +13,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import aplicativo.milreuelima.iesb.com.br.futebas.R;
+import aplicativo.milreuelima.iesb.com.br.futebas.core.FutebasDefaultValues;
 import aplicativo.milreuelima.iesb.com.br.futebas.core.MainRules;
+import aplicativo.milreuelima.iesb.com.br.futebas.entidades.Configuracao;
 import aplicativo.milreuelima.iesb.com.br.futebas.entidades.EstadoPartida;
 import aplicativo.milreuelima.iesb.com.br.futebas.exceptions.GenericBusinessException;
 import aplicativo.milreuelima.iesb.com.br.futebas.exceptions.PartidaEstadoInvalidoException;
@@ -252,7 +254,10 @@ public class MainFutebasActivity extends AppCompatActivity {
                 case R.id.menu_preferencias:
                     pararCronometro.stop();
                     Intent intentPreferencia = new Intent(this, Preferencias.class);
-                    startActivity(intentPreferencia);
+                    Configuracao conf = mainFutebas.getConfiguracao();
+                    intentPreferencia.putExtra("conf", mainFutebas.getConfiguracao());
+
+                    startActivityForResult(intentPreferencia, FutebasDefaultValues.REQUEST_CODE_PREFERENCIAS);
                     break;
                 case R.id.menu_espera:
                     pararCronometro.stop();
@@ -269,6 +274,28 @@ public class MainFutebasActivity extends AppCompatActivity {
             trataGenericBusinessException(e);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (requestCode){
+            case FutebasDefaultValues.REQUEST_CODE_PREFERENCIAS:
+                Configuracao conf = mainFutebas.getConfiguracao();
+                Configuracao confAlterada = (Configuracao) data.getSerializableExtra("conf");
+                conf.setNumeroMinimoJogadores(confAlterada.getNumeroMinimoJogadores());
+                conf.setNumeroMaximoJogadores(confAlterada.getNumeroMaximoJogadores());
+
+                try {
+                    mainFutebas.salvaConfiguracoes();
+                } catch (GenericBusinessException e) {
+                    trataGenericBusinessException(e);
+                }
+
+
+        }
+
     }
 
     private void atualizaTela(){
