@@ -286,6 +286,9 @@ public class MainFutebasActivity extends AppCompatActivity {
                 Configuracao confAlterada = (Configuracao) data.getSerializableExtra("conf");
                 conf.setNumeroMinimoJogadores(confAlterada.getNumeroMinimoJogadores());
                 conf.setNumeroMaximoJogadores(confAlterada.getNumeroMaximoJogadores());
+                conf.setNumTempos(confAlterada.getNumTempos());
+                conf.setDuracaoTempo(confAlterada.getDuracaoTempo());
+                conf.setRecuperaPartida(confAlterada.isRecuperaPartida());
 
                 try {
                     mainFutebas.salvaConfiguracoes();

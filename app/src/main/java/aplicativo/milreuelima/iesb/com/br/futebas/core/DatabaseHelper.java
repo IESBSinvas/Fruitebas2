@@ -86,7 +86,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             db.execSQL("CREATE TABLE IF NOT EXISTS configuracao (_id INTEGER PRIMARY KEY, " +
                                                                 "num_min_jogadores INTEGER, " +
-                                                                "num_max_jogadores INTEGER);");
+                                                                "num_max_jogadores INTEGER," +
+                                                                "num_tempos INTEGER," +
+                                                                "num_minutos_tempo INTEGER," +
+                                                                "bol_recupera_partida);");
 
             carregaConfiguracoesIniciais(db);
 
@@ -102,7 +105,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         try {
 
-            cursorConfiguracao = db.rawQuery("SELECT _id, num_min_jogadores, num_max_jogadores FROM configuracao WHERE _id = 1", null);
+            cursorConfiguracao = db.rawQuery("SELECT _id, " +
+                                                    "num_min_jogadores, " +
+                                                    "num_max_jogadores, " +
+                                                    "num_tempos, " +
+                                                    "num_minutos_tempo, " +
+                                                    "bol_recupera_partida " +
+                                                    "FROM configuracao WHERE _id = 1", null);
             cursorConfiguracao.moveToFirst();
 
             if (cursorConfiguracao.getCount() == 0){
@@ -112,6 +121,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
                 value.put("num_min_jogadores", FutebasDefaultValues.QTD_MIN_JOGADORES_TIME);
                 value.put("num_max_jogadores", FutebasDefaultValues.QTD_MAX_JOGADORES_TIME);
+                value.put("num_tempos", FutebasDefaultValues.QTD_TEMPOS_PARTIDA);
+                value.put("num_minutos_tempo", FutebasDefaultValues.QTD_MINUTOS_TEMPO);
+                value.put("bol_recupera_partida", FutebasDefaultValues.RECUPERA_PARTIDA_EM_ANDAMENTO);
 
                 result = db.insert("configuracao", null, value);
 
@@ -136,18 +148,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         try {
 
-            cursorConfiguracao = db.rawQuery("SELECT _id, num_min_jogadores, num_max_jogadores FROM configuracao WHERE _id = 1", null);
+            cursorConfiguracao = db.rawQuery("SELECT _id," +
+                                                    "num_min_jogadores, " +
+                                                    "num_max_jogadores, " +
+                                                    "num_tempos, " +
+                                                    "num_minutos_tempo, " +
+                                                    "bol_recupera_partida " +
+                                                    "FROM configuracao WHERE _id = 1", null);
             cursorConfiguracao.moveToFirst();
 
             if (cursorConfiguracao.getCount() >= 1){
                 //Recupera o registro mais recente
                 retorno.setNumeroMinimoJogadores(cursorConfiguracao.getInt(1));
                 retorno.setNumeroMaximoJogadores(cursorConfiguracao.getInt(2));
+                retorno.setNumTempos(cursorConfiguracao.getInt(3));
+                retorno.setDuracaoTempo(cursorConfiguracao.getInt(4));
+                retorno.setRecuperaPartida(cursorConfiguracao.getInt(5)>0);
             }
         }catch (Exception ex){
              retorno = new Configuracao();
             retorno.setNumeroMinimoJogadores(FutebasDefaultValues.QTD_MIN_JOGADORES_TIME);
             retorno.setNumeroMaximoJogadores(FutebasDefaultValues.QTD_MAX_JOGADORES_TIME);
+            retorno.setNumTempos(FutebasDefaultValues.QTD_TEMPOS_PARTIDA);
+            retorno.setDuracaoTempo(FutebasDefaultValues.QTD_MINUTOS_TEMPO);
+            retorno.setRecuperaPartida(FutebasDefaultValues.RECUPERA_PARTIDA_EM_ANDAMENTO);
 
         }finally {
             if(cursorConfiguracao != null){ cursorConfiguracao.close();}
@@ -168,6 +192,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
             value.put("num_min_jogadores", conf.getNumeroMinimoJogadores());
             value.put("num_max_jogadores", conf.getNumeroMaximoJogadores());
+            value.put("num_tempos", conf.getNumTempos());
+            value.put("num_minutos_tempo", conf.getDuracaoTempo());
+            value.put("bol_recupera_partida", conf.isRecuperaPartida());
 
             result =  db.update("configuracao", value, "_id = 1", null );
 

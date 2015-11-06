@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import aplicativo.milreuelima.iesb.com.br.futebas.R;
@@ -19,6 +21,10 @@ public class Preferencias extends AppCompatActivity {
     private Configuracao conf = null;
     private EditText editTextMinJogadores;
     private EditText editTextMaxJogadores;
+    private RadioButton radioUmTempo;
+    private RadioButton radioDoisTempos;
+    private EditText editDuracaoTempos;
+    private CheckBox checkRecuperaPartida;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +37,17 @@ public class Preferencias extends AppCompatActivity {
         //Assinalando objetos da tela
         editTextMinJogadores = (EditText)findViewById(R.id.nmMinJog);
         editTextMaxJogadores = (EditText)findViewById(R.id.nmMaxJog);
+        radioUmTempo = (RadioButton)findViewById(R.id.rbUmTempo);
+        radioDoisTempos = (RadioButton)findViewById(R.id.rbDoisTempos);
+        editDuracaoTempos = (EditText)findViewById(R.id.txtDuracaoTempos);
+        checkRecuperaPartida = (CheckBox)findViewById(R.id.ckRecuperaPartida);
 
         editTextMinJogadores.setText(String.valueOf(conf.getNumeroMinimoJogadores()));
         editTextMaxJogadores.setText(String.valueOf(conf.getNumeroMaximoJogadores()));
-
+        radioUmTempo.setChecked(conf.getNumTempos() == 1);
+        radioDoisTempos.setChecked(!radioUmTempo.isChecked());
+        editDuracaoTempos.setText(String.valueOf(conf.getDuracaoTempo()));
+        checkRecuperaPartida.setChecked(conf.isRecuperaPartida());
 
     }
 
@@ -84,6 +97,10 @@ public class Preferencias extends AppCompatActivity {
 
         conf.setNumeroMinimoJogadores(Integer.valueOf(editTextMinJogadores.getText().toString()));
         conf.setNumeroMaximoJogadores(Integer.valueOf(editTextMaxJogadores.getText().toString()));
+        conf.setNumTempos(radioUmTempo.isChecked()? 1 : 2);
+        conf.setDuracaoTempo(Integer.valueOf(editDuracaoTempos.getText().toString()));
+        conf.setRecuperaPartida(checkRecuperaPartida.isChecked());
+
         itRetorno.putExtra("conf", conf);
 
         Preferencias.this.setResult(RESULT_OK, itRetorno);
